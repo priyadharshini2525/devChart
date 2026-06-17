@@ -27,13 +27,20 @@ export async function POST(request: Request){
 
         const body = await request.json();
 
+        console.log(body);  
+
         const task = await Task.create(body);
 
-await Activitylog.create({action: "created", tasktitle: task.title})
+        await Activitylog.create({
+            action: "created",
+            tasktitle: task.title
+        });
 
         return Response.json(task,{status: 201});
+
     }catch(error){
         console.log(error);
+
         return Response.json(
             {message:"Failed to create task"},
             {status: 500}
