@@ -15,7 +15,7 @@ const TaskCard = ({ title, description, priority, status, _id, fetchTasks}: Task
             ? "bg-yellow-400"
             : "bg-green-400";
     
-    async function updatestatus(newStatus) {
+    async function updatestatus(newStatus: string) {
     const response = await fetch(`/api/tasks/${_id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

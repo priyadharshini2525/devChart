@@ -1,5 +1,6 @@
 import connectDB from "@/lib/mongodb";
 import Task from "@/models/Tasks";
+import Activitylog from "@/models/Activitylog";
 
 export async function GET(){
     try{
@@ -27,6 +28,8 @@ export async function POST(request: Request){
         const body = await request.json();
 
         const task = await Task.create(body);
+
+await Activitylog.create({action: "created", tasktitle: task.title})
 
         return Response.json(task,{status: 201});
     }catch(error){
